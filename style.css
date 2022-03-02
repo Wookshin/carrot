@@ -1,0 +1,32 @@
+/* Global */ 
+:root {
+  /* Size */
+  --icon-size: 80px;
+}
+
+
+#game {
+  height: calc(100vh - 80px);
+  width: calc(100vw - 80px);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("./img/background.png");
+}
+
+.bug {
+  height: var(--icon-size);
+  width: var(--icon-size);
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("./img/bug.png");
+}
+
+.carrot {
+  height: var(--icon-size);
+  width: var(--icon-size);
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("./img/carrot.png");
+}
