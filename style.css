@@ -1,16 +1,50 @@
 /* Global */ 
 :root {
   /* Size */
-  --icon-size: 80px;
+  --icon-size: 60px;
+  --width-size: 80px;
+  --height-size: 80px;
+
+  /* Border */
+  --border-radius: 5px;
+  --border: 3px solid black;
+
+  /* Font size */
+  --font-large: 48px;
+  --font-medium: 28px;
+  --font-semi-medium: 22px;
+  --font-regular: 18px;
+  --font-small: 16px;
+  --font-micro: 14px;
 }
 
+/* Universal tags */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: cadetblue;
+}
+
+header {
+  margin: 20px auto;
+  width: 95vw;
+  text-align: center;
+  font-size: var(--font-medium);
+  font-weight: 800;
+  color: #ffffff;
+}
 
 #game {
-  height: calc(100vh - 80px);
-  width: calc(100vw - 80px);
-  background-size: contain;
+  height: 50vh;
+  width: 95vw;
+  margin: 0 auto;
+  background-size: cover;
   background-repeat: no-repeat;
   background-image: url("./img/background.png");
+  border-radius: var(--border-radius);
 }
 
 .bug {
@@ -29,4 +63,53 @@
   background-size: contain;
   background-repeat: no-repeat;
   background-image: url("./img/carrot.png");
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  height: 30%;
+  justify-content: space-evenly;
+}
+
+.menu__play {
+  outline: none;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  background-color: blanchedalmond;
+  width: calc(var(--width-size)/2);
+  height: calc(var(--height-size)/2);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fa-solid.fa-square {
+  background-color: black;
+  width: 40%;
+  height: 40%;
+}
+
+.menu__timer {
+  background-color: white;
+  width: var(--width-size);
+  height: calc(var(--height-size)/3);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  font-size: var(--font-regular);
+  font-weight: 600;
+
+}
+
+.menu__count {
+  color: white;
+  background-color: orange;
+  border: var(--border);
+  border-radius: 50%;
+  width: calc(var(--width-size)/2);
+  height: calc(var(--height-size)/2);
+  font-size: var(--font-medium);
 }
