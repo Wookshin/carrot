@@ -1,6 +1,6 @@
 # carrot
 
-<img src="https://wookshin.github.io/portfolio/imgs/projects/carrot.png" width="600px" height="600px" title="carrot game" />
+<img src="https://wookshin.github.io/portfolio/imgs/projects/carrot.png" title="carrot game" />
 
 carrot game
 
