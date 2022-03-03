@@ -90,18 +90,12 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 5px;
 }
 
-.fa-solid.fa-square {
-  background-color: black;
-  width: 40%;
-  height: 40%;
-}
-
-.fa-solid.fa-play {
-  color:cadetblue;
-  width: 40%;
-  height: 40%;
+.stop, .play {
+  color: black;
+  font-size: var(--font-medium);
 }
 
 .hidden {
@@ -116,7 +110,7 @@ header {
   border-radius: var(--border-radius);
   font-size: var(--font-regular);
   font-weight: 600;
-
+  margin-bottom: 5px;
 }
 
 .menu__count {
