@@ -37,6 +37,10 @@ header {
   color: #ffffff;
 }
 
+.map {
+  height: 70%;
+}
+
 #game {
   height: 50vh;
   width: 95vw;
