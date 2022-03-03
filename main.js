@@ -1,12 +1,20 @@
 const $map = document.querySelector('.map')
+const $menuCount = document.querySelector('.menu__count')
+const $menuTimer = document.querySelector('.menu__timer')
 const bugs = []
 const carrots = []
 const BUG_COUNT = 10
 const CARROT_COUNT = 10
 const ICON_SIZE = 60
+let limitTime = '10'
 
 renderBugs()
 renderCarrots()
+
+$menuTimer.textContent = `${Math.floor(limitTime/60)}:${limitTime%60}`
+$menuCount.textContent = carrots.length
+
+startTimer()
 
 function renderBugs () {
   for (let i = 0; i < BUG_COUNT; i++) {
@@ -44,4 +52,14 @@ function createCarrot () {
   carrot.style.top = `${topPos}px`
 
   return carrot
+}
+
+function startTimer () {
+  var intervalId = window.setInterval(() => {
+    limitTime = limitTime - 1
+    $menuTimer.textContent = `${Math.floor(limitTime/60)}:${limitTime%60}`
+    if (limitTime === 0) {
+      window.clearInterval(intervalId)
+    }
+  }, 1000)
 }

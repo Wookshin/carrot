@@ -26,6 +26,7 @@
 body {
   margin: 0;
   background-color: cadetblue;
+  font-family: "Open Sans", sans-serif;
 }
 
 header {
@@ -97,6 +98,16 @@ header {
   height: 40%;
 }
 
+.fa-solid.fa-play {
+  color:cadetblue;
+  width: 40%;
+  height: 40%;
+}
+
+.hidden {
+  display: none; 
+}
+
 .menu__timer {
   background-color: white;
   width: var(--width-size);
@@ -115,5 +126,10 @@ header {
   border-radius: 50%;
   width: calc(var(--width-size)/2);
   height: calc(var(--height-size)/2);
-  font-size: var(--font-medium);
+  font-size: var(--font-semi-medium);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
 }
