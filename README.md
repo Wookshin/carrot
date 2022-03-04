@@ -1,4 +1,7 @@
 # carrot
+
+<img src="https://wookshin.github.io/portfolio/imgs/projects/carrot.png" title="carrot game" />
+
 carrot game
 
 ## 요구사항 분석
