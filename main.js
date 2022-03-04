@@ -4,10 +4,13 @@ const $menuTimer = document.querySelector('.menu__timer')
 const $play = document.querySelector('.play')
 const $stop = document.querySelector('.stop')
 const $menuPlay = document.querySelector('.menu__play')
+const $modal = document.querySelector('.modal')
+const $modalContent = document.querySelector('.modal__content')
 const bugs = []
 const carrots = []
 const BUG_COUNT = 10
 const CARROT_COUNT = 10
+let count = CARROT_COUNT
 const ICON_SIZE = 40
 let limitTime = '10'
 let isPlaying = false
@@ -15,9 +18,7 @@ let intervalId;
 
 renderBugs()
 renderCarrots()
-
-$menuTimer.textContent = `${Math.floor(limitTime/60)}:${limitTime%60}`
-$menuCount.textContent = carrots.length
+renderMenu()
 
 /* 타이머를 클릭하면 게임이 시작된다. */
 $menuPlay.addEventListener('click', (e) => {
@@ -27,10 +28,44 @@ $menuPlay.addEventListener('click', (e) => {
   else {
     startTimer()
   }
-  $stop.classList.toggle('hidden')
-  $play.classList.toggle('hidden')
+
   isPlaying = !isPlaying
 })
+
+/* 당근을 클릭하면 클릭된 당근이 사라지고 Count가 줄어든다 */
+$map.addEventListener('click', (e) => {
+  if (!isPlaying) {
+    return
+  }
+
+  if (e.target.matches('.carrot')) {
+    let target = e.target
+    carrots.filter(carrot => carrot.dataset.id !== target.dataset.id)
+    $map.removeChild(target)
+    count = count - 1
+    $menuCount.textContent = count
+
+    if (count === 0) {
+      winGame()
+    }
+  }
+})
+
+/* Bug를 클릭하면 클릭된 버그가 사라지고 게임이 종료된다 */
+$map.addEventListener('click', (e) => {
+  if (!isPlaying) {
+    return
+  }
+
+  if (e.target.matches('.bug')) {
+    const target = e.target
+    $map.removeChild(target)
+    lostGame()
+  }
+})
+
+/* restart를 누르면 게임이 다시 시작된다 */
+$modal.querySelector('.restart').addEventListener('click', restartHandler)
 
 function renderBugs () {
   for (let i = 0; i < BUG_COUNT; i++) {
@@ -42,7 +77,7 @@ function renderBugs () {
 
 function renderCarrots () {
   for (let i = 0; i < CARROT_COUNT; i++) {
-    const carrot = createCarrot()
+    const carrot = createCarrot(i)
     carrots.push(carrot)
   }
   carrots.forEach(carrot => $map.appendChild(carrot))
@@ -59,11 +94,12 @@ function createBug () {
   return bug
 }
 
-function createCarrot () {
+function createCarrot (id) {
   const leftPos = $map.offsetLeft + Math.random() * ($map.clientWidth - ICON_SIZE)
   const topPos = Math.random() * ($map.clientHeight - ICON_SIZE)
   const carrot = document.createElement('div')
   carrot.classList.add('carrot')
+  carrot.dataset.id = id
   carrot.style.left = `${leftPos}px`
   carrot.style.top = `${topPos}px`
 
@@ -71,15 +107,54 @@ function createCarrot () {
 }
 
 function startTimer () {
+  $stop.classList.toggle('hidden')
+  $play.classList.toggle('hidden')
   intervalId = window.setInterval(() => {
     limitTime = limitTime - 1
     $menuTimer.textContent = `${Math.floor(limitTime/60)}:${limitTime%60}`
     if (limitTime === 0) {
       window.clearInterval(intervalId)
+      lostGame()
     }
   }, 1000)
 }
 
 function stopTimer () {
+  $stop.classList.toggle('hidden')
+  $play.classList.toggle('hidden')
   window.clearInterval(intervalId)
+}
+
+function lostGame () {
+  stopTimer()
+  $modal.classList.toggle('hidden')
+  $modalContent.textContent = 'Game end 😥'
+}
+
+function winGame () {
+  stopTimer()
+  $modal.classList.toggle('hidden')
+  $modalContent.textContent = 'Congratularion ✨'
+}
+
+function restartHandler () {
+  initState() 
+  renderBugs()
+  renderCarrots()
+  renderMenu()
+  $modal.classList.toggle('hidden')
+}
+
+function initState () {
+  bugs.length = 0
+  carrots.length = 0
+  count = CARROT_COUNT
+  limitTime = '10'
+  isPlaying = false
+  $map.innerHTML = ''
+}
+
+function renderMenu () {
+  $menuTimer.textContent = `${Math.floor(limitTime/60)}:${limitTime%60}`
+  $menuCount.textContent = carrots.length
 }
