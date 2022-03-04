@@ -27,6 +27,7 @@ body {
   margin: 0;
   background-color: cadetblue;
   font-family: "Open Sans", sans-serif;
+  cursor: default;
 }
 
 header {
@@ -56,6 +57,7 @@ header {
   background-size: contain;
   background-repeat: no-repeat;
   background-image: url("./img/bug.png");
+  cursor: pointer;
 }
 
 .carrot {
@@ -65,6 +67,7 @@ header {
   background-size: contain;
   background-repeat: no-repeat;
   background-image: url("./img/carrot.png");
+  cursor: pointer;
 }
 
 .map {
@@ -98,6 +101,7 @@ header {
   align-items: center;
   justify-content: center;
   margin-bottom: 5px;
+  cursor: pointer;
 }
 
 .stop, .play {
@@ -105,7 +109,7 @@ header {
   font-size: var(--font-semi-medium);
 }
 
-.hidden {
+.hidden, .modal.hidden {
   display: none; 
 }
 
@@ -133,4 +137,36 @@ header {
   align-items: center;
   padding: 0;
   margin: 0;
+}
+
+.modal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: var(--border-radius);
+  top:50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.modal__content {
+  font-weight: bold;
+  font-size: var(--font-medium);
+  margin-bottom: 10px;
+}
+
+.modal button {
+  font-weight: bold;
+  background-color: cadetblue;
+  color: white;
+  border-radius: var(--border-radius);
+  height: 30px;
+  width: 70px;
+  cursor: pointer;
+  z-index: 999;
 }
