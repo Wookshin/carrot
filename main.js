@@ -1,12 +1,17 @@
 const $map = document.querySelector('.map')
 const $menuCount = document.querySelector('.menu__count')
 const $menuTimer = document.querySelector('.menu__timer')
+const $play = document.querySelector('.play')
+const $stop = document.querySelector('.stop')
+const $menuPlay = document.querySelector('.menu__play')
 const bugs = []
 const carrots = []
 const BUG_COUNT = 10
 const CARROT_COUNT = 10
-const ICON_SIZE = 60
+const ICON_SIZE = 40
 let limitTime = '10'
+let isPlaying = false
+let intervalId;
 
 renderBugs()
 renderCarrots()
@@ -14,7 +19,18 @@ renderCarrots()
 $menuTimer.textContent = `${Math.floor(limitTime/60)}:${limitTime%60}`
 $menuCount.textContent = carrots.length
 
-startTimer()
+/* 타이머를 클릭하면 게임이 시작된다. */
+$menuPlay.addEventListener('click', (e) => {
+  if (isPlaying) {
+    stopTimer()
+  }
+  else {
+    startTimer()
+  }
+  $stop.classList.toggle('hidden')
+  $play.classList.toggle('hidden')
+  isPlaying = !isPlaying
+})
 
 function renderBugs () {
   for (let i = 0; i < BUG_COUNT; i++) {
@@ -34,7 +50,7 @@ function renderCarrots () {
 
 function createBug () {
   const leftPos = $map.offsetLeft + Math.random() * ($map.clientWidth - ICON_SIZE)
-  const topPos = $map.offsetTop + Math.random() * ($map.clientHeight - ICON_SIZE)
+  const topPos = Math.random() * ($map.clientHeight - ICON_SIZE)
   const bug = document.createElement('div')
   bug.classList.add('bug')
   bug.style.left = `${leftPos}px`
@@ -45,7 +61,7 @@ function createBug () {
 
 function createCarrot () {
   const leftPos = $map.offsetLeft + Math.random() * ($map.clientWidth - ICON_SIZE)
-  const topPos = $map.offsetTop + Math.random() * ($map.clientHeight - ICON_SIZE)
+  const topPos = Math.random() * ($map.clientHeight - ICON_SIZE)
   const carrot = document.createElement('div')
   carrot.classList.add('carrot')
   carrot.style.left = `${leftPos}px`
@@ -55,11 +71,15 @@ function createCarrot () {
 }
 
 function startTimer () {
-  var intervalId = window.setInterval(() => {
+  intervalId = window.setInterval(() => {
     limitTime = limitTime - 1
     $menuTimer.textContent = `${Math.floor(limitTime/60)}:${limitTime%60}`
     if (limitTime === 0) {
       window.clearInterval(intervalId)
     }
   }, 1000)
+}
+
+function stopTimer () {
+  window.clearInterval(intervalId)
 }

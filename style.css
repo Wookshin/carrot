@@ -1,7 +1,7 @@
 /* Global */ 
 :root {
   /* Size */
-  --icon-size: 60px;
+  --icon-size: 40px;
   --width-size: 80px;
   --height-size: 80px;
 
@@ -38,11 +38,8 @@ header {
   color: #ffffff;
 }
 
-.map {
-  height: 70%;
-}
-
 #game {
+  position: relative;
   height: 50vh;
   width: 95vw;
   margin: 0 auto;
@@ -70,13 +67,23 @@ header {
   background-image: url("./img/carrot.png");
 }
 
+.map {
+  height: 70%;
+  position: absolute;
+  width: 100%;
+  top: 30%;
+}
+
 .menu {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5px;
   height: 30%;
+  top: 5px;
   justify-content: space-evenly;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .menu__play {
@@ -85,7 +92,7 @@ header {
   border-radius: var(--border-radius);
   background-color: blanchedalmond;
   width: calc(var(--width-size)/2);
-  height: calc(var(--height-size)/2);
+  height: 40%;
   padding: 0;
   display: flex;
   align-items: center;
@@ -95,7 +102,7 @@ header {
 
 .stop, .play {
   color: black;
-  font-size: var(--font-medium);
+  font-size: var(--font-semi-medium);
 }
 
 .hidden {
@@ -105,7 +112,7 @@ header {
 .menu__timer {
   background-color: white;
   width: var(--width-size);
-  height: calc(var(--height-size)/3);
+  height: 30%;
   border: var(--border);
   border-radius: var(--border-radius);
   font-size: var(--font-regular);
@@ -119,7 +126,7 @@ header {
   border: var(--border);
   border-radius: 50%;
   width: calc(var(--width-size)/2);
-  height: calc(var(--height-size)/2);
+  height: 30%;
   font-size: var(--font-semi-medium);
   display: flex;
   justify-content: center;
