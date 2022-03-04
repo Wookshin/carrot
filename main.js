@@ -8,6 +8,7 @@ const bugs = []
 const carrots = []
 const BUG_COUNT = 10
 const CARROT_COUNT = 10
+let count = CARROT_COUNT
 const ICON_SIZE = 40
 let limitTime = '10'
 let isPlaying = false
@@ -32,6 +33,21 @@ $menuPlay.addEventListener('click', (e) => {
   isPlaying = !isPlaying
 })
 
+/* 당근을 클릭하면 클릭된 당근이 사라지고 Count가 줄어든다 */
+$map.addEventListener('click', (e) => {
+  if (!isPlaying) {
+    return 
+  }  
+  
+  if (e.target.matches('.carrot')) {
+    let target = e.target
+    carrots.filter(carrot => carrot.dataset.id !== target.dataset.id)
+    $map.removeChild(target)
+    count = count - 1
+    $menuCount.textContent = count
+  }
+})
+
 function renderBugs () {
   for (let i = 0; i < BUG_COUNT; i++) {
     const bug = createBug()
@@ -42,7 +58,7 @@ function renderBugs () {
 
 function renderCarrots () {
   for (let i = 0; i < CARROT_COUNT; i++) {
-    const carrot = createCarrot()
+    const carrot = createCarrot(i)
     carrots.push(carrot)
   }
   carrots.forEach(carrot => $map.appendChild(carrot))
@@ -59,11 +75,12 @@ function createBug () {
   return bug
 }
 
-function createCarrot () {
+function createCarrot (id) {
   const leftPos = $map.offsetLeft + Math.random() * ($map.clientWidth - ICON_SIZE)
   const topPos = Math.random() * ($map.clientHeight - ICON_SIZE)
   const carrot = document.createElement('div')
   carrot.classList.add('carrot')
+  carrot.dataset.id = id
   carrot.style.left = `${leftPos}px`
   carrot.style.top = `${topPos}px`
 
