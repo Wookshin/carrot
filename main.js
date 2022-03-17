@@ -1,3 +1,4 @@
+/* 필요한 변수 선언 */
 const $map = document.querySelector('.map')
 const $menuCount = document.querySelector('.menu__count')
 const $menuTimer = document.querySelector('.menu__timer')
@@ -14,11 +15,22 @@ let count = CARROT_COUNT
 const ICON_SIZE = 40
 let limitTime = '10'
 let isPlaying = false
-let intervalId;
+let intervalId
+const bgAudio = new Audio('./sound/bg.mp3')
+const bugAudio = new Audio('./sound/bug_pull.mp3')
+bugAudio.loop = false
+const carrotAudio = new Audio('./sound/carrot_pull.mp3')
+carrotAudio.loop = false
+const winAudio = new Audio('./sound/game_win.mp3')
+winAudio.loop = false
+const alertAudio = new Audio('./sound/alert.wav')
+alertAudio.loop = false
 
+/* 화면 오픈 시 수행되는 로직 */
 renderBugs()
 renderCarrots()
 renderMenu()
+bgAudio.play()
 
 /* 타이머를 클릭하면 게임이 시작된다. */
 $menuPlay.addEventListener('click', (e) => {
@@ -39,7 +51,8 @@ $map.addEventListener('click', (e) => {
   }
 
   if (e.target.matches('.carrot')) {
-    let target = e.target
+    carrotAudio.play()
+    const target = e.target
     carrots.filter(carrot => carrot.dataset.id !== target.dataset.id)
     $map.removeChild(target)
     count = count - 1
@@ -58,6 +71,7 @@ $map.addEventListener('click', (e) => {
   }
 
   if (e.target.matches('.bug')) {
+    bugAudio.play()
     const target = e.target
     $map.removeChild(target)
     lostGame()
@@ -126,12 +140,14 @@ function stopTimer () {
 }
 
 function lostGame () {
+  alertAudio.play()
   stopTimer()
   $modal.classList.toggle('hidden')
   $modalContent.textContent = 'Game end 😥'
 }
 
 function winGame () {
+  winAudio.play()
   stopTimer()
   $modal.classList.toggle('hidden')
   $modalContent.textContent = 'Congratularion ✨'
