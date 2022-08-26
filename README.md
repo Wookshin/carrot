@@ -2,7 +2,7 @@
 
 <img src="https://wookshin.github.io/portfolio/imgs/projects/carrot.png" title="carrot game" />
 
-carrot game
+당근을 잡아라! 벌레를 피하라! 
 
 ## 요구사항 분석
 
